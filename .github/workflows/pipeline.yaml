@@ -38,10 +38,8 @@ jobs:
           path: bin/main
           retention-days: 1
 
-      
 
-
-  # test:
+  test:
 
     name: Test
     runs-on: ubuntu-latest
