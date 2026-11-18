@@ -52,9 +52,18 @@ jobs:
         with:
           name: binario
 
+      - name: Instalar herramientas
+        run: |
+          sudo apt-get update
+          sudo apt install unzip
+
+      - name: Descomprimir el archivo
+        run: |
+          unzip binario.zip
+      
       - name: Ejecutar una vez
         run: |
-          ./binario
+          ./main
           ps -ef
           echo "TEST SUCCESSFUL"
 
