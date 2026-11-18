@@ -51,6 +51,7 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           name: binario
+          path: .
 
       - name: Instalar herramientas
         run: |
