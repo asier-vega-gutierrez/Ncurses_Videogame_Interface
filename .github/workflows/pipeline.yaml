@@ -1,0 +1,56 @@
+name: GitHub Actions Demo
+run-name: Cpp custom pipeline
+on: [push]
+
+jobs:
+
+  build:
+
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Clonar repositorio privado
+        run: |
+          git clone https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git project
+          cd project
+          git status
+
+      - name: Instalar herramientas
+        run: |
+          sudo apt-get update
+          sudo apt install -y cmake build-essential
+          
+      - name: Compilar proyecto
+        run: |
+          cd project
+          mkdir build
+          cd build
+          cmake ..
+          make
+
+
+      # #
+      # - name: Subir binario compilado como artefacto
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: Ejecutable
+      #     path: build/main
+
+      
+
+
+  # test:
+
+  #     name: Build
+  #     runs-on: ubuntu-latest
+
+  #     steps:
+  #       - name: Ejecutar una vez
+  #         run: |
+  #           cd my-project
+  #           cd bin
+  #           ./main ../config/config.yaml
+
+  # release:
