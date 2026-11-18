@@ -31,7 +31,7 @@ jobs:
           make
           echo "BUILD SUCCESSFUL"
 
-      - name: Subir binario compilado
+      - name: Subir artefacto compilado
         uses: actions/upload-artifact@v7
         with:
           name: binario
@@ -47,13 +47,14 @@ jobs:
 
     steps:
 
-      - name: Subir binario compilado como artefacto
+      - name: Descargar artefacto
         uses: actions/download-artifact@v8
         with:
           name: binario
 
       - name: Instalar herramientas
         run: |
+          ls -a
           sudo apt-get update
           sudo apt install unzip
 
