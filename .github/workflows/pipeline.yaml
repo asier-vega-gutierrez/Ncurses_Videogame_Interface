@@ -55,13 +55,7 @@ jobs:
 
       - name: Instalar herramientas
         run: |
-          ls -a
           sudo apt-get update
-
-      - name: Descomprimir el archivo
-        run: |
-          ls -a
-          unzip binario.zip
       
       - name: Ejecutar una vez
         run: |
