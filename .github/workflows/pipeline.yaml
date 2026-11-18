@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: binario
-          path: bin/main
+          path: project/bin/main
           retention-days: 1
 
 
