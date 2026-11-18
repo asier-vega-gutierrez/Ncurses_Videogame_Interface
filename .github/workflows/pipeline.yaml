@@ -59,6 +59,7 @@ jobs:
 
       - name: Descomprimir el archivo
         run: |
+          ls -a
           unzip binario.zip
       
       - name: Ejecutar una vez
