@@ -29,28 +29,36 @@ jobs:
           cd build
           cmake ..
           make
+          echo "BUILD SUCCESSFUL"
 
-
-      # #
-      # - name: Subir binario compilado como artefacto
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: Ejecutable
-      #     path: build/main
+      - name: Subir binario compilado como artefacto
+        uses: actions/upload-artifact@v7
+        with:
+          name: binario
+          path: bin/main
+          retention-days: 1
 
       
 
 
   # test:
 
-  #     name: Build
-  #     runs-on: ubuntu-latest
+    name: Test
+    runs-on: ubuntu-latest
 
-  #     steps:
-  #       - name: Ejecutar una vez
-  #         run: |
-  #           cd my-project
-  #           cd bin
-  #           ./main ../config/config.yaml
+    steps:
+
+      - name: Subir binario compilado como artefacto
+        uses: actions/download-artifact@v8
+        with:
+          name: binario
+
+      - name: Ejecutar una vez
+        run: |
+          ./binario
+          ps -ef
+          echo "TEST SUCCESSFUL"
+
+
 
   # release:
