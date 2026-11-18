@@ -37,9 +37,7 @@ jobs:
           name: binario
           path: project/bin/main
           retention-days: 1
-          if-no-files-found:
-            error: "File not found"
-
+          if-no-files-found: error
 
   test:
 
