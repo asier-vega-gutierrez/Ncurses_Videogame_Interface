@@ -57,7 +57,6 @@ jobs:
         run: |
           ls -a
           sudo apt-get update
-          sudo apt install unzip
 
       - name: Descomprimir el archivo
         run: |
@@ -66,6 +65,7 @@ jobs:
       
       - name: Ejecutar una vez
         run: |
+          chmod +x ./main
           ./main
           ps -ef
           echo "TEST SUCCESSFUL"
