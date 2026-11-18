@@ -32,6 +32,9 @@ private:
     // LOG
     Log log = Log();
 
+    // BACKEND
+
+
 
     //temporal
     bool onece = false;
@@ -54,6 +57,7 @@ public:
     int inputs();
     int outputs();
     int print_interface();
+    int run_backend();
 
 };
 
