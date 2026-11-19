@@ -62,7 +62,7 @@ jobs:
       - name: Ejecutar una vez
         run: |
           chmod +x ./main
-          { ps -ef; sleep 1; printf 'e'; } | script -q -c "./main" /dev/null
+          { ps -ef; sleep 10; printf 'e'; } | script -q -c "./main" /dev/null
           echo "TEST SUCCESSFUL"
 
 
