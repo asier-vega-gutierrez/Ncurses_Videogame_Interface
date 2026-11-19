@@ -62,8 +62,20 @@ jobs:
       - name: Ejecutar una vez
         run: |
           chmod +x ./main
-          { sleep 1; printf 'e'; } | script -q -c "./main" /dev/null
+          fifo=$(mktemp -u)
+          mkfifo "$fifo"
+          exec 3<>"$fifo"
+          rm -f "$fifo"
+
+          script -q -c "./main" /dev/null <&3 &
+          pid=$!
+
+          sleep 1
           ps -ef
+
+          printf 'e' >&3
+          wait "$pid"
+          exec 3>&-
           echo "TEST SUCCESSFUL"
 
 
