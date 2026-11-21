@@ -1,0 +1,70 @@
+name: GitHub Actions Demo
+run-name: Cpp custom pipeline
+on: [push, workflow_dispatch]
+
+jobs:
+
+  build:
+
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Clonar repositorio privado
+        run: |
+          git clone https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git project
+          cd project
+          git status
+
+      - name: Instalar herramientas
+        run: |
+          sudo apt-get update
+          sudo apt install -y cmake build-essential
+          
+      - name: Compilar proyecto
+        run: |
+          cd project
+          mkdir build
+          cd build
+          cmake ..
+          make
+          echo "BUILD SUCCESSFUL"
+
+      - name: Subir artefacto compilado
+        uses: actions/upload-artifact@v7
+        with:
+          name: binario
+          path: project/bin/main
+          retention-days: 1
+          if-no-files-found: error
+
+  test:
+
+    name: test
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      TERM: xterm-256color
+
+    steps:
+
+      - name: Descargar artefacto
+        uses: actions/download-artifact@v8
+        with:
+          name: binario
+          path: .
+
+      - name: Instalar herramientas
+        run: |
+          sudo apt-get update
+      
+      - name: Ejecutar una vez
+        run: |
+          chmod +x ./main
+          { sleep 10; printf 'e'; } | script -q -c "./main" /dev/null
+          echo "TEST SUCCESSFUL"
+
+
+
+  # release:

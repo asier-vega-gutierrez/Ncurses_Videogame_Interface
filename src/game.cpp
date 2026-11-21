@@ -56,6 +56,9 @@ int Game::run(){
         bar_render.update();
         console_render.update();
 
+        // BACKEND
+        run_backend();
+
         //otras ejecuciones
         outputs();
         
@@ -137,5 +140,11 @@ int Game::print_interface(){
     delete[] console_menu;
     delete[] bar_menu;
 
+    return 0;
+}
+
+
+int Game::run_backend(){
+    
     return 0;
 }
